@@ -12,7 +12,7 @@ const Search = () => {
         <fieldset style={{ borderRadius: '6px' }}>
           <legend>年份</legend>
           <Select
-            defaultValue="lucy"
+            defaultValue="111"
             bordered={false}
             style={{
               width: 120,
@@ -23,16 +23,23 @@ const Search = () => {
             }}
             onChange={handleChange}
             options={[
-              { value: 'jack', label: 'Jack' },
-              { value: 'lucy', label: 'Lucy' },
-              { value: 'Yiminghe', label: 'yiminghe' },
-              { value: 'disabled', label: 'Disabled', disabled: true },
+              { value: '111', label: '111' },
+              { value: '110', label: '110' },
+              { value: '109', label: '109' },
+              { value: '108', label: '108' },
+              { value: '107', label: '107' },
+              { value: '106', label: '106' },
+              { value: '105', label: '105' },
+              { value: '104', label: '104' },
+              { value: '103', label: '103' },
+              //   { value: 'disabled', label: 'Disabled', disabled: true },
             ]}
           />
         </fieldset>
         <fieldset style={{ borderRadius: '6px' }}>
           <legend>縣 / 市</legend>
           <Select
+            mode="tags"
             placeholder="請選擇縣 / 市"
             bordered={false}
             style={{
@@ -55,6 +62,7 @@ const Search = () => {
           <legend>區</legend>
           <Select
             placeholder="請先選擇縣 / 市"
+            mode="tags"
             bordered={false}
             style={{
               width: 140,

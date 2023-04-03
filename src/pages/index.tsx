@@ -4,7 +4,8 @@ import Search from '@/components/search/Search';
 
 const App = (props: any) => {
   const data = props.data;
-  // console.log(data);
+  const records = data.result.records;
+  console.log(records);
   return (
     <>
       <h2>人口數、戶數按戶別及性別統計</h2>
