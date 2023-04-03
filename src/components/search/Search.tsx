@@ -39,7 +39,7 @@ const Search = () => {
         <fieldset style={{ borderRadius: '6px' }}>
           <legend>縣 / 市</legend>
           <Select
-            mode="tags"
+            showSearch
             placeholder="請選擇縣 / 市"
             bordered={false}
             style={{
@@ -51,11 +51,14 @@ const Search = () => {
             }}
             onChange={handleChange}
             options={[
-              { value: 'jack', label: 'Jack' },
-              { value: 'lucy', label: 'Lucy' },
-              { value: 'Yiminghe', label: 'yiminghe' },
-              { value: 'disabled', label: 'Disabled', disabled: true },
+              { value: 'taipei', label: '台北市' },
+              { value: 'new taipei', label: '新北市' },
+              { value: 'keelung', label: '基隆' },
+              //   { value: 'hualien', label: 'hualien', disabled: true },
             ]}
+            filterOption={(inputValue, option) =>
+              option!.label.indexOf(inputValue) !== -1
+            }
           />
         </fieldset>
         <fieldset style={{ borderRadius: '6px' }}>
@@ -73,11 +76,15 @@ const Search = () => {
             }}
             onChange={handleChange}
             options={[
-              { value: 'jack', label: 'Jack' },
-              { value: 'lucy', label: 'Lucy' },
-              { value: 'Yiminghe', label: 'yiminghe' },
-              { value: 'disabled', label: 'Disabled', disabled: true },
+              { value: 'taipei', label: '台北市' },
+              { value: 'new taipei', label: '新北市' },
+              { value: 'keelung', label: '基隆' },
+              //   { value: 'hualien', label: 'hualien', disabled: true },
             ]}
+            filterOption={(inputValue, option) =>
+              option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
+              -1
+            }
           />
         </fieldset>
         <Button type="primary">SUBMIT</Button>
