@@ -1,11 +1,42 @@
 import { Select, Space, Button } from 'antd';
+import { useState } from 'react';
 import classes from './Search.module.scss';
 
-const handleChange = (value: string) => {
-  console.log(`selected ${value}`);
-};
+const Search = (props: any) => {
+  const { records } = props;
+  console.log(records);
+  const [year, setYear] = useState('111');
+  const [city, setCity] = useState('');
+  const [district, setDistrict] = useState('');
 
-const Search = () => {
+  let yearOptions = new Set();
+  records.forEach((item: any) => {
+    !yearOptions.has(item.statistic_yyy)
+      ? yearOptions.add(item.statistic_yyy)
+      : false;
+  });
+
+  console.log(yearOptions);
+
+  const handleYearChange = (value: string) => {
+    // console.log(`selected ${value}`);
+    setYear(value);
+  };
+
+  const handleCityChange = (value: string) => {
+    // console.log(`selected ${value}`);
+    setCity(value);
+  };
+
+  const handleDistrictChange = (value: string) => {
+    // console.log(`selected ${value}`);
+    setDistrict(value);
+  };
+
+  const handleSubmit = () => {
+    console.log('year:', year, 'city:', city, 'district:', district);
+  };
+
   return (
     <>
       <Space wrap>
@@ -21,7 +52,7 @@ const Search = () => {
               marginLeft: '-10px',
               marginRight: '-10px',
             }}
-            onChange={handleChange}
+            onChange={handleYearChange}
             options={[
               { value: '111', label: '111' },
               { value: '110', label: '110' },
@@ -49,11 +80,11 @@ const Search = () => {
               marginLeft: '-10px',
               marginRight: '-10px',
             }}
-            onChange={handleChange}
+            onChange={handleCityChange}
             options={[
-              { value: 'taipei', label: '台北市' },
-              { value: 'new taipei', label: '新北市' },
-              { value: 'keelung', label: '基隆' },
+              { value: '台北市', label: '台北市' },
+              { value: '新北市', label: '新北市' },
+              { value: '基隆', label: '基隆' },
               //   { value: 'hualien', label: 'hualien', disabled: true },
             ]}
             filterOption={(inputValue, option) =>
@@ -65,7 +96,6 @@ const Search = () => {
           <legend>區</legend>
           <Select
             placeholder="請先選擇縣 / 市"
-            mode="tags"
             bordered={false}
             style={{
               width: 140,
@@ -74,20 +104,21 @@ const Search = () => {
               marginLeft: '-10px',
               marginRight: '-10px',
             }}
-            onChange={handleChange}
+            onChange={handleDistrictChange}
             options={[
               { value: 'taipei', label: '台北市' },
               { value: 'new taipei', label: '新北市' },
               { value: 'keelung', label: '基隆' },
-              //   { value: 'hualien', label: 'hualien', disabled: true },
+              { value: 'hualien', label: 'hualien', disabled: true },
             ]}
             filterOption={(inputValue, option) =>
-              option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
-              -1
+              option!.label.indexOf(inputValue) !== -1
             }
           />
         </fieldset>
-        <Button type="primary">SUBMIT</Button>
+        <Button type="primary" onClick={handleSubmit}>
+          SUBMIT
+        </Button>
       </Space>
       <section>
         <div className={classes.search_result}>搜尋結果</div>
