@@ -20,7 +20,7 @@ const Search = (props: any) => {
     let options = new Set();
     let result: any[] = [];
 
-    const getCityOptions = (records: any) => {
+    const getCityOptions = (records: []) => {
       records.forEach((item: any) => {
         !options.has(item.site_id.substring(0, 3))
           ? options.add(item.site_id.substring(0, 3))
@@ -83,7 +83,11 @@ const Search = (props: any) => {
         <fieldset style={{ borderRadius: '6px' }}>
           <legend>年份</legend>
           <Select
-            defaultValue={router.query.yearId ? router.query.yearId : '111'}
+            defaultValue={
+              (`${router.query.yearId}` as string)
+                ? (`${router.query.yearId}` as string)
+                : '111'
+            }
             bordered={false}
             style={{
               width: 120,
