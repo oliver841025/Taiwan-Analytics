@@ -1,3 +1,4 @@
+import getOptions from '@/utils/getOptions';
 import { Select, Space, Button } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -15,44 +16,6 @@ const Search = (props: any) => {
   useEffect(() => {
     setYear(`${router.query.yearId}` as string);
   }, [router.query]);
-
-  const getOptions = () => {
-    let options = new Set();
-    let result: any[] = [];
-
-    const getCityOptions = (records: []) => {
-      records.forEach((item: any) => {
-        !options.has(item.site_id.substring(0, 3))
-          ? options.add(item.site_id.substring(0, 3))
-          : false;
-      });
-      const cityOptionsArr = Array.from(options);
-      cityOptionsArr.shift();
-      for (let i = 0; i < cityOptionsArr.length; i++) {
-        result.push({ value: cityOptionsArr[i], label: cityOptionsArr[i] });
-      }
-      return result;
-    };
-
-    const getDistrictOptions = (records: any) => {
-      records.forEach((item: any) => {
-        !options.has(item.site_id.substring(3, 6))
-          ? options.add(item.site_id.substring(3, 6))
-          : false;
-      });
-      const districtOptionsArr = Array.from(options);
-      districtOptionsArr.shift();
-      for (let i = 0; i < districtOptionsArr.length; i++) {
-        result.push({
-          value: districtOptionsArr[i],
-          label: districtOptionsArr[i],
-        });
-      }
-      return result;
-    };
-
-    return { getCityOptions, getDistrictOptions };
-  };
 
   const cityOptions = getOptions().getCityOptions;
   const districtOptions = getOptions().getDistrictOptions;
@@ -73,7 +36,7 @@ const Search = (props: any) => {
   };
 
   const handleSubmit = () => {
-    router.push(`/${year}`);
+    router.push(`/${year}/${city}/${district}`);
     console.log('year:', year, 'city:', city, 'district:', district);
   };
 

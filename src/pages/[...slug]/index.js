@@ -1,7 +1,7 @@
 import Households from '@/components/households/Households';
 import Population from '@/components/population/Population';
 import Search from '@/components/search/Search';
-import { useRouter } from 'next/router';
+import getOptions from '@/utils/getOptions';
 
 const YearIndex = (props) => {
   const data = props.data;
@@ -30,7 +30,7 @@ export async function getStaticProps({ params }) {
     { year: '103', value: '012' },
   ];
   for (let i = 0; i < matchData.length; i++) {
-    if (params.yearId.toString() === matchData[i].year) {
+    if (params.slug[0] === matchData[i].year) {
       flag = matchData[i].value;
     }
   }
@@ -46,10 +46,31 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
+  const res = await fetch(
+    `https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-053`
+  );
+  const data = await res.json();
+  const records = data.result.records;
+  const cityOptions = getOptions().getCityOptions(records);
+  const districtOptions = getOptions().getDistrictOptions(records);
   const years = ['111', '110', '109', '108', '107', '106', '105', '104', '103'];
-  const paths = years.map((year) => ({
+
+  const result = [];
+  for (let i = 0; i < years.length; i++) {
+    for (let j = 0; j < cityOptions.length; j++) {
+      for (let k = 0; k < districtOptions.length; k++) {
+        result.push({
+          year: years[i],
+          city: cityOptions[j].value,
+          district: districtOptions[k].value,
+        });
+      }
+    }
+  }
+
+  const paths = result.map((eachResult) => ({
     params: {
-      yearId: year,
+      slug: [eachResult.year, eachResult.city, eachResult.district],
     },
   }));
   return { paths, fallback: false };
