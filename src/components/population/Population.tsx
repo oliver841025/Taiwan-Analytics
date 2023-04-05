@@ -23,17 +23,17 @@ const options = {
     labels: {
       format: '{value:.0f}k',
     },
-    tickInterval: 25,
+    tickInterval: 2.5,
   },
   series: [
     {
       name: '男性',
-      data: [49.9, 71.5],
+      data: [2.5, 2.5],
       color: '#7D5FB2',
     },
     {
       name: '女性',
-      data: [83.6, 78.8],
+      data: [2.5, 2.5],
       color: '#C29FFF',
     },
   ],

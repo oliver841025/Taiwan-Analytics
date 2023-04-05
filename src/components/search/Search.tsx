@@ -83,12 +83,8 @@ const Search = (props: any) => {
         <fieldset style={{ borderRadius: '6px' }}>
           <legend>年份</legend>
           <Select
-            defaultValue={
-              (`${router.query.yearId}` as string)
-                ? (`${router.query.yearId}` as string)
-                : '111'
-            }
             bordered={false}
+            placeholder="請選擇年份"
             style={{
               width: 120,
               marginTop: '-10px',
