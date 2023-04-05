@@ -9,14 +9,45 @@ const Search = (props: any) => {
   const [city, setCity] = useState('');
   const [district, setDistrict] = useState('');
 
-  let yearOptions = new Set();
-  records.forEach((item: any) => {
-    !yearOptions.has(item.statistic_yyy)
-      ? yearOptions.add(item.statistic_yyy)
-      : false;
-  });
+  const getOptions = () => {
+    let options = new Set();
+    let result: any[] = [];
 
-  console.log(yearOptions);
+    const getCityOptions = (records: any) => {
+      records.forEach((item: any) => {
+        !options.has(item.site_id.substring(0, 3))
+          ? options.add(item.site_id.substring(0, 3))
+          : false;
+      });
+      const cityOptionsArr = Array.from(options);
+      cityOptionsArr.shift();
+      for (let i = 0; i < cityOptionsArr.length; i++) {
+        result.push({ value: cityOptionsArr[i], label: cityOptionsArr[i] });
+      }
+      return result;
+    };
+
+    const getDistrictOptions = (records: any) => {
+      records.forEach((item: any) => {
+        !options.has(item.site_id.substring(3, 6))
+          ? options.add(item.site_id.substring(3, 6))
+          : false;
+      });
+      const districtOptionsArr = Array.from(options);
+      districtOptionsArr.shift();
+      for (let i = 0; i < districtOptionsArr.length; i++) {
+        result.push({
+          value: districtOptionsArr[i],
+          label: districtOptionsArr[i],
+        });
+      }
+      return result;
+    };
+
+    return { getCityOptions, getDistrictOptions };
+  };
+  const cityOptions = getOptions().getCityOptions;
+  const districtOptions = getOptions().getDistrictOptions;
 
   const handleYearChange = (value: string) => {
     // console.log(`selected ${value}`);
@@ -81,12 +112,7 @@ const Search = (props: any) => {
               marginRight: '-10px',
             }}
             onChange={handleCityChange}
-            options={[
-              { value: '台北市', label: '台北市' },
-              { value: '新北市', label: '新北市' },
-              { value: '基隆', label: '基隆' },
-              //   { value: 'hualien', label: 'hualien', disabled: true },
-            ]}
+            options={cityOptions(records)}
             filterOption={(inputValue, option) =>
               option!.label.indexOf(inputValue) !== -1
             }
@@ -95,6 +121,7 @@ const Search = (props: any) => {
         <fieldset style={{ borderRadius: '6px' }}>
           <legend>區</legend>
           <Select
+            showSearch
             placeholder="請先選擇縣 / 市"
             bordered={false}
             style={{
@@ -105,12 +132,7 @@ const Search = (props: any) => {
               marginRight: '-10px',
             }}
             onChange={handleDistrictChange}
-            options={[
-              { value: 'taipei', label: '台北市' },
-              { value: 'new taipei', label: '新北市' },
-              { value: 'keelung', label: '基隆' },
-              { value: 'hualien', label: 'hualien', disabled: true },
-            ]}
+            options={districtOptions(records)}
             filterOption={(inputValue, option) =>
               option!.label.indexOf(inputValue) !== -1
             }
