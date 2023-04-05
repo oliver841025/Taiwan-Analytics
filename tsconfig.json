@@ -22,7 +22,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/population/Population.tsx"
+    "src/components/population/Population.tsx",
+    "src/pages/[yearId]/index.js"
   ],
   "exclude": ["node_modules"]
 }

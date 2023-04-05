@@ -1,13 +1,10 @@
 import { Select, Space, Button } from 'antd';
-import { useState } from 'react';
 import classes from './Search.module.scss';
 
 const Search = (props: any) => {
-  const { records } = props;
-  console.log(records);
-  const [year, setYear] = useState('111');
-  const [city, setCity] = useState('');
-  const [district, setDistrict] = useState('');
+  const { records, year, setYear, city, setCity, district, setDistrict } =
+    props;
+  //   console.log(records);
 
   const getOptions = () => {
     let options = new Set();
@@ -46,6 +43,7 @@ const Search = (props: any) => {
 
     return { getCityOptions, getDistrictOptions };
   };
+
   const cityOptions = getOptions().getCityOptions;
   const districtOptions = getOptions().getDistrictOptions;
 
