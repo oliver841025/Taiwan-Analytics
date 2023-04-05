@@ -16,9 +16,9 @@ const App = (props: any) => {
       <Search
         records={records}
         year={year}
-        setYear={year}
+        setYear={setYear}
         city={city}
-        setCity={city}
+        setCity={setCity}
         district={district}
         setDistrict={setDistrict}
       />
