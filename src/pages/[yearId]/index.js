@@ -1,13 +1,22 @@
+import Households from '@/components/households/Households';
+import Population from '@/components/population/Population';
+import Search from '@/components/search/Search';
+import { useRouter } from 'next/router';
+
 const YearIndex = (props) => {
   const data = props.data;
   const records = data.result.records;
-  console.log(records);
 
-  return <div>index</div>;
+  return (
+    <>
+      <Search records={records} />
+      <Population />
+      <Households />
+    </>
+  );
 };
 
 export async function getStaticProps({ params }) {
-  console.log(params.yearId);
   let flag = '053';
   const matchData = [
     { year: '111', value: '053' },

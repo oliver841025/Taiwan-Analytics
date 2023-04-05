@@ -23,7 +23,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/components/population/Population.tsx",
-    "src/pages/[yearId]/index.js"
+    "src/pages/[yearId]/index.js",
+    "src/components/search/Search.tsxx"
   ],
   "exclude": ["node_modules"]
 }

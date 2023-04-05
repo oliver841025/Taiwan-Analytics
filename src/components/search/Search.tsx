@@ -1,10 +1,20 @@
 import { Select, Space, Button } from 'antd';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import classes from './Search.module.scss';
 
 const Search = (props: any) => {
-  const { records, year, setYear, city, setCity, district, setDistrict } =
-    props;
+  const { records } = props;
+  const [year, setYear] = useState('111');
+  const [city, setCity] = useState('');
+  const [district, setDistrict] = useState('');
   //   console.log(records);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    setYear(`${router.query.yearId}` as string);
+  }, [router.query]);
 
   const getOptions = () => {
     let options = new Set();
@@ -63,6 +73,7 @@ const Search = (props: any) => {
   };
 
   const handleSubmit = () => {
+    router.push(`/${year}`);
     console.log('year:', year, 'city:', city, 'district:', district);
   };
 
@@ -72,7 +83,7 @@ const Search = (props: any) => {
         <fieldset style={{ borderRadius: '6px' }}>
           <legend>年份</legend>
           <Select
-            defaultValue="111"
+            defaultValue={router.query.yearId ? router.query.yearId : '111'}
             bordered={false}
             style={{
               width: 120,
