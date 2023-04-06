@@ -45,14 +45,7 @@ function Search(props: any) {
 
   return (
     <>
-      <Space
-        wrap
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
+      <Space wrap className={classes.space}>
         <fieldset
           style={{
             borderRadius: '4px',
@@ -95,10 +88,7 @@ function Search(props: any) {
             showSearch
             placeholder="請選擇縣 / 市"
             bordered={false}
-            style={{
-              width: 165,
-              marginTop: '-5px',
-            }}
+            className={classes.city_and_district_select}
             onChange={handleCityChange}
             options={cityOptions(records)}
             filterOption={(inputValue, option) =>
@@ -121,10 +111,7 @@ function Search(props: any) {
             showSearch
             placeholder="請先選擇縣 / 市"
             bordered={false}
-            style={{
-              width: 165,
-              marginTop: '-5px',
-            }}
+            className={classes.city_and_district_select}
             onChange={handleDistrictChange}
             options={districtOptions(records)}
             filterOption={(inputValue, option) =>

@@ -5,3 +5,20 @@
   font-size: 32px;
   margin-bottom: 30px;
 }
+
+.subtitle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+@media screen and (max-width: 1024px) {
+  .title {
+    font-size: 25px;
+  }
+
+  .subtitle {
+    font-size: 25px;
+  }
+}

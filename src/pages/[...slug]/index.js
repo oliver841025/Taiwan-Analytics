@@ -8,6 +8,7 @@ import Search from '@/components/search/Search';
 import getOptions from '@/utils/getOptions';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import classes from '@/styles/global.module.scss';
 
 function YearIndex(props) {
   const { data } = props;
@@ -50,14 +51,7 @@ function YearIndex(props) {
   return (
     <>
       <Search records={records} />
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginBottom: '30px',
-          fontSize: '32px',
-        }}
-      >
+      <div className={classes.subtitle}>
         {`${router.query.slug[0]} ${router.query.slug[1]} ${router.query.slug[2]}`}
       </div>
       <Population
