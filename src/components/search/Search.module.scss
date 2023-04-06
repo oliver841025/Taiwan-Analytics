@@ -23,4 +23,20 @@
   padding: 6px 16px 6px 16px;
   margin-top: 7px;
   cursor: pointer;
+  background-color: #4096ff;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.search_btn_disabled {
+  height: 36.5px;
+  border-radius: 4px;
+  border: none;
+  padding: 6px 16px 6px 16px;
+  margin-top: 7px;
+  background-color: #d4d4d4;
+  color: #9f9f9f;
+  font-weight: 700;
+  font-size: 14px;
 }

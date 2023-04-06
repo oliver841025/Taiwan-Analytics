@@ -116,13 +116,24 @@ function Search(props: any) {
             }
           />
         </fieldset>
-        <button
-          type="submit"
-          className={classes.search_btn}
-          onClick={handleSubmit}
-        >
-          SUBMIT
-        </button>
+        {year && city && district && (
+          <button
+            type="submit"
+            className={classes.search_btn}
+            onClick={handleSubmit}
+          >
+            SUBMIT
+          </button>
+        )}
+        {(!year || !city || !district) && (
+          <button
+            type="submit"
+            className={classes.search_btn_disabled}
+            disabled
+          >
+            SUBMIT
+          </button>
+        )}
       </Space>
       <section
         style={{
