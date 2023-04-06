@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable import/extensions */
 import getOptions from '@/utils/getOptions';
@@ -41,6 +43,28 @@ function Search(props: any) {
   const handleSubmit = () => {
     router.push(`/${year}/${city}/${district}`);
     console.log('year:', year, 'city:', city, 'district:', district);
+  };
+
+  const getRealDistrictOptions = (records: any, city: any) => {
+    const options = new Set();
+    const result: any[] = [];
+
+    records.forEach((item: any) => {
+      if (item.site_id.substring(0, 3) === city.toString()) {
+        !options.has(item.site_id.substring(3, 6))
+          ? options.add(item.site_id.substring(3, 6))
+          : false;
+      }
+    });
+    const districtOptionsArr = Array.from(options);
+    districtOptionsArr.shift();
+    for (let i = 0; i < districtOptionsArr.length; i++) {
+      result.push({
+        value: districtOptionsArr[i],
+        label: districtOptionsArr[i],
+      });
+    }
+    return result;
   };
 
   return (
@@ -113,7 +137,7 @@ function Search(props: any) {
             bordered={false}
             className={classes.city_and_district_select}
             onChange={handleDistrictChange}
-            options={districtOptions(records, city)}
+            options={getRealDistrictOptions(records, city)}
             filterOption={(inputValue, option) =>
               option!.label.indexOf(inputValue) !== -1
             }
