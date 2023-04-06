@@ -6,7 +6,7 @@ import classes from '../styles/global.module.scss';
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div>
-      <h3 className={classes.wrapper}>人口數、戶數按戶別及性別統計</h3>
+      <div className={classes.title}>人口數、戶數按戶別及性別統計</div>
       <Component {...pageProps} />
     </div>
   );

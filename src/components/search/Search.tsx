@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable import/extensions */
 import getOptions from '@/utils/getOptions';
-import { Select, Space, Button } from 'antd';
+import { Select, Space } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import classes from './Search.module.scss';
@@ -53,14 +53,20 @@ function Search(props: any) {
           justifyContent: 'center',
         }}
       >
-        <fieldset style={{ borderRadius: '4px', padding: '0px' }}>
-          <legend>年份</legend>
+        <fieldset
+          style={{
+            borderRadius: '4px',
+            padding: '0px',
+            border: '1.5px solid #B6B6B6',
+          }}
+        >
+          <legend style={{ fontSize: '7px' }}>年份</legend>
           <Select
             bordered={false}
             placeholder="年份"
             style={{
               width: 70,
-              marginTop: '-15px',
+              marginTop: '-5px',
             }}
             onChange={handleYearChange}
             options={[
@@ -77,15 +83,21 @@ function Search(props: any) {
             ]}
           />
         </fieldset>
-        <fieldset style={{ borderRadius: '4px', padding: '0px' }}>
-          <legend>縣 / 市</legend>
+        <fieldset
+          style={{
+            borderRadius: '4px',
+            padding: '0px',
+            border: '1.5px solid #B6B6B6',
+          }}
+        >
+          <legend style={{ fontSize: '7px' }}>縣 / 市</legend>
           <Select
             showSearch
             placeholder="請選擇縣 / 市"
             bordered={false}
             style={{
               width: 165,
-              marginTop: '-15px',
+              marginTop: '-5px',
             }}
             onChange={handleCityChange}
             options={cityOptions(records)}
@@ -95,10 +107,14 @@ function Search(props: any) {
           />
         </fieldset>
         <fieldset
-          style={{ borderRadius: '4px', padding: '0px' }}
+          style={{
+            borderRadius: '4px',
+            padding: '0px',
+            border: '1.5px solid #B6B6B6',
+          }}
           disabled={!city}
         >
-          <legend>區</legend>
+          <legend style={{ fontSize: '7px' }}>區</legend>
           <Select
             value={district}
             disabled={!city}
@@ -107,7 +123,7 @@ function Search(props: any) {
             bordered={false}
             style={{
               width: 165,
-              marginTop: '-15px',
+              marginTop: '-5px',
             }}
             onChange={handleDistrictChange}
             options={districtOptions(records)}
@@ -135,15 +151,11 @@ function Search(props: any) {
           </button>
         )}
       </Space>
-      <section
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginTop: '40px',
-          marginBottom: '40px',
-        }}
-      >
-        <div className={classes.search_result}>搜尋結果</div>
+      <section style={{ marginTop: '40px', marginBottom: '40px' }}>
+        <hr className={classes.result_line} />
+        <div className={classes.search_result_wrapper}>
+          <div className={classes.search_result}>搜尋結果</div>
+        </div>
       </section>
     </>
   );

@@ -50,6 +50,16 @@ function YearIndex(props) {
   return (
     <>
       <Search records={records} />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: '30px',
+          fontSize: '32px',
+        }}
+      >
+        {`${router.query.slug[0]} ${router.query.slug[1]} ${router.query.slug[2]}`}
+      </div>
       <Population
         householdOrdinaryMale={householdOrdinaryMale}
         householdOrdinaryFemale={householdOrdinaryFemale}
