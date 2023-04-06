@@ -1,5 +1,3 @@
-import Population from '@/components/population/Population';
-import Households from '@/components/households/Households';
 import Search from '@/components/search/Search';
 
 const App = (props: any) => {
@@ -9,8 +7,6 @@ const App = (props: any) => {
   return (
     <>
       <Search records={records} />
-      <Population />
-      <Households />
     </>
   );
 };

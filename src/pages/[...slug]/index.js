@@ -2,15 +2,56 @@ import Households from '@/components/households/Households';
 import Population from '@/components/population/Population';
 import Search from '@/components/search/Search';
 import getOptions from '@/utils/getOptions';
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const YearIndex = (props) => {
   const data = props.data;
   const records = data.result.records;
+  const router = useRouter();
+  const [targetData, setTargetData] = useState([]);
+  const [householdOrdinaryMale, setHouseholdOrdinaryMale] = useState(0);
+  const [householdOrdinaryFemale, setHouseholdOrdinaryFemale] = useState(0);
+  const [householdSingleMale, setHouseholdSingleMale] = useState(0);
+  const [householdSingleFemale, setHouseholdSingleFemale] = useState(0);
+
+  useEffect(() => {
+    const flag = router.query.slug[1] + router.query.slug[2];
+    const result = records.filter((el) => {
+      return el.site_id === flag;
+    });
+    setTargetData(result);
+  }, [router.query, records]);
+
+  const getDetailTotal = useCallback(
+    (flag) => {
+      let total = 0;
+      for (let i = 0; i < targetData.length; i++) {
+        total += parseInt(targetData[i][flag]);
+      }
+      return total;
+    },
+    [targetData]
+  );
+
+  useEffect(() => {
+    setHouseholdOrdinaryMale(getDetailTotal('household_ordinary_m'));
+    setHouseholdOrdinaryFemale(getDetailTotal('household_ordinary_f'));
+    setHouseholdSingleMale(getDetailTotal('household_single_m'));
+    setHouseholdSingleFemale(getDetailTotal('household_single_f'));
+  }, [getDetailTotal]);
 
   return (
     <>
       <Search records={records} />
-      <Population />
+      <Population
+        householdOrdinaryMale={householdOrdinaryMale}
+        householdOrdinaryFemale={householdOrdinaryFemale}
+        householdSingleMale={householdSingleMale}
+        householdSingleFemale={householdSingleFemale}
+      />
       <Households />
     </>
   );
