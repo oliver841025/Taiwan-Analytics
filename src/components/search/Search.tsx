@@ -45,18 +45,22 @@ function Search(props: any) {
 
   return (
     <>
-      <Space wrap>
-        <fieldset style={{ borderRadius: '6px' }}>
+      <Space
+        wrap
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <fieldset style={{ borderRadius: '4px', padding: '0px' }}>
           <legend>年份</legend>
           <Select
             bordered={false}
-            placeholder="請選擇年份"
+            placeholder="年份"
             style={{
-              width: 120,
-              marginTop: '-10px',
-              marginBottom: '-6px',
-              marginLeft: '-10px',
-              marginRight: '-10px',
+              width: 70,
+              marginTop: '-15px',
             }}
             onChange={handleYearChange}
             options={[
@@ -73,18 +77,15 @@ function Search(props: any) {
             ]}
           />
         </fieldset>
-        <fieldset style={{ borderRadius: '6px' }}>
+        <fieldset style={{ borderRadius: '4px', padding: '0px' }}>
           <legend>縣 / 市</legend>
           <Select
             showSearch
             placeholder="請選擇縣 / 市"
             bordered={false}
             style={{
-              width: 125,
-              marginTop: '-10px',
-              marginBottom: '-6px',
-              marginLeft: '-10px',
-              marginRight: '-10px',
+              width: 165,
+              marginTop: '-15px',
             }}
             onChange={handleCityChange}
             options={cityOptions(records)}
@@ -93,7 +94,10 @@ function Search(props: any) {
             }
           />
         </fieldset>
-        <fieldset style={{ borderRadius: '6px' }} disabled={!city}>
+        <fieldset
+          style={{ borderRadius: '4px', padding: '0px' }}
+          disabled={!city}
+        >
           <legend>區</legend>
           <Select
             value={district}
@@ -102,11 +106,8 @@ function Search(props: any) {
             placeholder="請先選擇縣 / 市"
             bordered={false}
             style={{
-              width: 140,
-              marginTop: '-10px',
-              marginBottom: '-6px',
-              marginLeft: '-10px',
-              marginRight: '-10px',
+              width: 165,
+              marginTop: '-15px',
             }}
             onChange={handleDistrictChange}
             options={districtOptions(records)}
@@ -115,11 +116,17 @@ function Search(props: any) {
             }
           />
         </fieldset>
-        <Button type="primary" onClick={handleSubmit}>
+        <button
+          type="submit"
+          className={classes.search_btn}
+          onClick={handleSubmit}
+        >
           SUBMIT
-        </Button>
+        </button>
       </Space>
-      <section>
+      <section
+        style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}
+      >
         <div className={classes.search_result}>搜尋結果</div>
       </section>
     </>

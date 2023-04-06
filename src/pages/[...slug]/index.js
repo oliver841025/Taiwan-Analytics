@@ -35,7 +35,7 @@ function YearIndex(props) {
       }
       return total;
     },
-    [targetData],
+    [targetData]
   );
 
   useEffect(() => {
