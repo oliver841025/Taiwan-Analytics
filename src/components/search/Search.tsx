@@ -125,7 +125,12 @@ function Search(props: any) {
         </button>
       </Space>
       <section
-        style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '40px',
+          marginBottom: '40px',
+        }}
       >
         <div className={classes.search_result}>搜尋結果</div>
       </section>
