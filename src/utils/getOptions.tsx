@@ -21,7 +21,7 @@ export default function getOptions() {
   const getDistrictOptions = (records: any, city: any) => {
     records.forEach((item: any) => {
       // 確認只有在 city 符合的情況下才會給相對應的區選項
-      if (item.site_id.substring(0, 3) === city.toString()) {
+      if (item.site_id.substring(0, 3) === city?.toString()) {
         !options.has(item.site_id.substring(3, 6))
           ? options.add(item.site_id.substring(3, 6))
           : false;
