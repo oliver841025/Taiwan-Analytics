@@ -16,6 +16,8 @@ const YearIndex = (props) => {
   const [householdOrdinaryFemale, setHouseholdOrdinaryFemale] = useState(0);
   const [householdSingleMale, setHouseholdSingleMale] = useState(0);
   const [householdSingleFemale, setHouseholdSingleFemale] = useState(0);
+  const [householdOrdinaryTotal, setHouseholdOrdinaryTotal] = useState(0);
+  const [householdSingleTotal, setHouseholdSingleTotal] = useState(0);
 
   useEffect(() => {
     const flag = router.query.slug[1] + router.query.slug[2];
@@ -41,6 +43,8 @@ const YearIndex = (props) => {
     setHouseholdOrdinaryFemale(getDetailTotal('household_ordinary_f'));
     setHouseholdSingleMale(getDetailTotal('household_single_m'));
     setHouseholdSingleFemale(getDetailTotal('household_single_f'));
+    setHouseholdOrdinaryTotal(getDetailTotal('household_ordinary_total'));
+    setHouseholdSingleTotal(getDetailTotal('household_single_total'));
   }, [getDetailTotal]);
 
   return (
@@ -52,7 +56,10 @@ const YearIndex = (props) => {
         householdSingleMale={householdSingleMale}
         householdSingleFemale={householdSingleFemale}
       />
-      <Households />
+      <Households
+        householdOrdinaryTotal={householdOrdinaryTotal}
+        householdSingleTotal={householdSingleTotal}
+      />
     </>
   );
 };
