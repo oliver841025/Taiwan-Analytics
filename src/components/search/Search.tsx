@@ -113,7 +113,7 @@ function Search(props: any) {
             bordered={false}
             className={classes.city_and_district_select}
             onChange={handleDistrictChange}
-            options={districtOptions(records)}
+            options={districtOptions(records, city)}
             filterOption={(inputValue, option) =>
               option!.label.indexOf(inputValue) !== -1
             }
