@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/jsx-filename-extension */
 import type { AppProps } from 'next/app';
 
 export default function App({ Component, pageProps }: AppProps) {

@@ -1,6 +1,8 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-unused-expressions */
 export default function getOptions() {
-  let options = new Set();
-  let result: any[] = [];
+  const options = new Set();
+  const result: any[] = [];
 
   const getCityOptions = (records: []) => {
     records.forEach((item: any) => {
@@ -9,7 +11,7 @@ export default function getOptions() {
         : false;
     });
     const cityOptionsArr = Array.from(options);
-    cityOptionsArr.shift();
+    cityOptionsArr.shift(); // 移除第一筆，因為是說明
     for (let i = 0; i < cityOptionsArr.length; i++) {
       result.push({ value: cityOptionsArr[i], label: cityOptionsArr[i] });
     }

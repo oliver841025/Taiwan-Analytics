@@ -1,12 +1,13 @@
-import classes from './Population.module.scss';
+/* eslint-disable react/jsx-filename-extension */
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import classes from './Population.module.scss';
 
 const getOptions = (
-  num_ordinary_m: number,
-  num_ordinary_f: number,
-  num_single_m: number,
-  num_single_f: number
+  numOrdinaryM: number,
+  numOrdinaryF: number,
+  numSingleM: number,
+  numSingleF: number
 ) => {
   const options = {
     chart: {
@@ -34,12 +35,12 @@ const getOptions = (
     series: [
       {
         name: '男性',
-        data: [num_ordinary_m / 1000, num_single_m / 1000],
+        data: [numOrdinaryM / 1000, numSingleM / 1000],
         color: '#7D5FB2',
       },
       {
         name: '女性',
-        data: [num_ordinary_f / 1000, num_single_f / 1000],
+        data: [numOrdinaryF / 1000, numSingleF / 1000],
         color: '#C29FFF',
       },
     ],
@@ -47,7 +48,7 @@ const getOptions = (
   return options;
 };
 
-const Population = (props: any) => {
+function Population(props: any) {
   const {
     householdOrdinaryMale,
     householdOrdinaryFemale,
@@ -55,22 +56,20 @@ const Population = (props: any) => {
     householdSingleFemale,
   } = props;
   return (
-    <>
-      <div className={classes.wrapper}>
-        <div id="container" className={classes.chart}>
-          <HighchartsReact
-            highcharts={Highcharts}
-            options={getOptions(
-              householdOrdinaryMale,
-              householdOrdinaryFemale,
-              householdSingleMale,
-              householdSingleFemale
-            )}
-          />
-        </div>
+    <div className={classes.wrapper}>
+      <div id="container" className={classes.chart}>
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={getOptions(
+            householdOrdinaryMale,
+            householdOrdinaryFemale,
+            householdSingleMale,
+            householdSingleFemale
+          )}
+        />
       </div>
-    </>
+    </div>
   );
-};
+}
 
 export default Population;

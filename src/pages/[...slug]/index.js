@@ -1,15 +1,17 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable no-plusplus */
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable import/extensions */
 import Households from '@/components/households/Households';
 import Population from '@/components/population/Population';
 import Search from '@/components/search/Search';
 import getOptions from '@/utils/getOptions';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-const YearIndex = (props) => {
-  const data = props.data;
-  const records = data.result.records;
+function YearIndex(props) {
+  const { data } = props;
+  const { records } = data.result;
   const router = useRouter();
   const [targetData, setTargetData] = useState([]);
   const [householdOrdinaryMale, setHouseholdOrdinaryMale] = useState(0);
@@ -21,9 +23,7 @@ const YearIndex = (props) => {
 
   useEffect(() => {
     const flag = router.query.slug[1] + router.query.slug[2];
-    const result = records.filter((el) => {
-      return el.site_id === flag;
-    });
+    const result = records.filter((el) => el.site_id === flag);
     setTargetData(result);
   }, [router.query, records]);
 
@@ -31,11 +31,11 @@ const YearIndex = (props) => {
     (flag) => {
       let total = 0;
       for (let i = 0; i < targetData.length; i++) {
-        total += parseInt(targetData[i][flag]);
+        total += parseInt(targetData[i][flag], 10);
       }
       return total;
     },
-    [targetData]
+    [targetData],
   );
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const YearIndex = (props) => {
       />
     </>
   );
-};
+}
 
 export async function getStaticProps({ params }) {
   let flag = '053';
@@ -95,10 +95,10 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const res = await fetch(
-    `https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-053`
+    'https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-053'
   );
   const data = await res.json();
-  const records = data.result.records;
+  const { records } = data.result;
   const cityOptions = getOptions().getCityOptions(records);
   const districtOptions = getOptions().getDistrictOptions(records);
   const years = ['111', '110', '109', '108', '107', '106', '105', '104', '103'];

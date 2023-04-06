@@ -1,15 +1,13 @@
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable import/extensions */
 import Search from '@/components/search/Search';
 
-const App = (props: any) => {
-  const data = props.data;
-  const records = data.result.records;
+function App(props: any) {
+  const { data } = props;
+  const { records } = data.result;
   // console.log(records);
-  return (
-    <>
-      <Search records={records} />
-    </>
-  );
-};
+  return <Search records={records} />;
+}
 
 export async function getStaticProps() {
   const res = await fetch(

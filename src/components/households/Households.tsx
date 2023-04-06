@@ -1,8 +1,9 @@
-import classes from './Households.module.scss';
+/* eslint-disable react/jsx-filename-extension */
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import classes from './Households.module.scss';
 
-const getOptions = (num_ordinary: number, num_single: number) => {
+const getOptions = (numOrdinary: number, numSingle: number) => {
   const options = {
     chart: {
       type: 'pie',
@@ -31,12 +32,12 @@ const getOptions = (num_ordinary: number, num_single: number) => {
         data: [
           {
             name: '共同生活',
-            y: num_ordinary,
+            y: numOrdinary,
             color: '#626EB2',
           },
           {
             name: '獨立生活',
-            y: num_single,
+            y: numSingle,
             color: '#A3B1FF',
           },
         ],
@@ -46,20 +47,18 @@ const getOptions = (num_ordinary: number, num_single: number) => {
   return options;
 };
 
-const Households = (props: any) => {
+function Households(props: any) {
   const { householdOrdinaryTotal, householdSingleTotal } = props;
   return (
-    <>
-      <div className={classes.wrapper}>
-        <div id="container" className={classes.chart}>
-          <HighchartsReact
-            highcharts={Highcharts}
-            options={getOptions(householdOrdinaryTotal, householdSingleTotal)}
-          />
-        </div>
+    <div className={classes.wrapper}>
+      <div id="container" className={classes.chart}>
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={getOptions(householdOrdinaryTotal, householdSingleTotal)}
+        />
       </div>
-    </>
+    </div>
   );
-};
+}
 
 export default Households;

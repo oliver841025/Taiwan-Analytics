@@ -1,10 +1,12 @@
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable import/extensions */
 import getOptions from '@/utils/getOptions';
 import { Select, Space, Button } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import classes from './Search.module.scss';
 
-const Search = (props: any) => {
+function Search(props: any) {
   const { records } = props;
   const [year, setYear] = useState('111');
   const [city, setCity] = useState('');
@@ -91,14 +93,11 @@ const Search = (props: any) => {
             }
           />
         </fieldset>
-        <fieldset
-          style={{ borderRadius: '6px' }}
-          disabled={city ? false : true}
-        >
+        <fieldset style={{ borderRadius: '6px' }} disabled={!city}>
           <legend>區</legend>
           <Select
             value={district}
-            disabled={city ? false : true}
+            disabled={!city}
             showSearch
             placeholder="請先選擇縣 / 市"
             bordered={false}
@@ -125,6 +124,6 @@ const Search = (props: any) => {
       </section>
     </>
   );
-};
+}
 
 export default Search;
