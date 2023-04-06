@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable react/jsx-filename-extension */
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';

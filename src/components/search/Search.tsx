@@ -1,3 +1,7 @@
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-filename-extension */
@@ -35,14 +39,14 @@ function Search(props: any) {
     setDistrict(null);
   };
 
-  const handleDistrictChange = (value: string) => {
+  const handleDistrictChange = (value: any) => {
     // console.log(`selected ${value}`);
     setDistrict(value);
   };
 
   const handleSubmit = () => {
     router.push(`/${year}/${city}/${district}`);
-    console.log('year:', year, 'city:', city, 'district:', district);
+    // console.log('year:', year, 'city:', city, 'district:', district);
   };
 
   const getRealDistrictOptions = (records: any, city: any) => {

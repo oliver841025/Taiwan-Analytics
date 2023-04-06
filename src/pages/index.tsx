@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable import/extensions */
 import Search from '@/components/search/Search';
