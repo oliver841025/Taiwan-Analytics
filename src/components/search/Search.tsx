@@ -8,7 +8,7 @@ const Search = (props: any) => {
   const { records } = props;
   const [year, setYear] = useState('111');
   const [city, setCity] = useState('');
-  const [district, setDistrict] = useState('');
+  const [district, setDistrict] = useState(null);
   //   console.log(records);
 
   const router = useRouter();
@@ -28,6 +28,7 @@ const Search = (props: any) => {
   const handleCityChange = (value: string) => {
     // console.log(`selected ${value}`);
     setCity(value);
+    setDistrict(null);
   };
 
   const handleDistrictChange = (value: string) => {
@@ -90,9 +91,14 @@ const Search = (props: any) => {
             }
           />
         </fieldset>
-        <fieldset style={{ borderRadius: '6px' }}>
+        <fieldset
+          style={{ borderRadius: '6px' }}
+          disabled={city ? false : true}
+        >
           <legend>區</legend>
           <Select
+            value={district}
+            disabled={city ? false : true}
             showSearch
             placeholder="請先選擇縣 / 市"
             bordered={false}
