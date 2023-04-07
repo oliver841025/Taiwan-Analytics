@@ -104,7 +104,7 @@ export async function getStaticPaths() {
   const data = await res.json();
   const { records } = data.result;
   const cityOptions = getOptions().getCityOptions(records);
-  const districtOptions = getOptions().getDistrictOptions(records);
+  const districtOptions = getOptions().getAllDistrictOptions(records);
   const years = ['111', '110', '109', '108', '107', '106', '105', '104', '103'];
 
   const result = [];

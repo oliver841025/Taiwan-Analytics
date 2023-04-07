@@ -14,16 +14,16 @@ import classes from './Search.module.scss';
 
 function Search(props: any) {
   const { records } = props;
-  const [year, setYear] = useState('111');
+  const [year, setYear] = useState('');
   const [city, setCity] = useState('');
   const [district, setDistrict] = useState(null);
   //   console.log(records);
 
   const router = useRouter();
 
-  useEffect(() => {
-    setYear(`${router.query.yearId}` as string);
-  }, [router.query]);
+  // useEffect(() => {
+  //   setYear(`${router.query.yearId}` as string);
+  // }, [router.query]);
 
   const cityOptions = getOptions().getCityOptions;
   const districtOptions = getOptions().getDistrictOptions;
@@ -83,6 +83,7 @@ function Search(props: any) {
         >
           <legend style={{ fontSize: '7px' }}>年份</legend>
           <Select
+            showSearch
             bordered={false}
             placeholder="年份"
             style={{
