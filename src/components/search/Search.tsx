@@ -14,32 +14,16 @@ import classes from './Search.module.scss';
 
 function Search(props: any) {
   const { records } = props;
-<<<<<<< HEAD
   const [year, setYear] = useState('');
-=======
-  const [year, setYear] = useState('111');
->>>>>>> parent of 88dae9f (v2)
   const [city, setCity] = useState('');
   const [district, setDistrict] = useState(null);
   //   console.log(records);
 
   const router = useRouter();
 
-<<<<<<< HEAD
-  // useEffect(() => {
   //   setYear(`${router.query.yearId}` as string);
   // }, [router.query]);
-=======
-  useEffect(() => {
-    setYear(`${router.query.yearId}` as string);
-  }, [router.query]);
->>>>>>> parent of 88dae9f (v2)
 
-  const cityOptions = getOptions().getCityOptions;
-  const districtOptions = getOptions().getDistrictOptions;
-
-  const handleYearChange = (value: string) => {
-    // console.log(`selected ${value}`);
     setYear(value);
   };
 
