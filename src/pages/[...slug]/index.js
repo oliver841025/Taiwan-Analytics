@@ -105,7 +105,11 @@ export async function getStaticPaths() {
   const data = await res.json();
   const { records } = data.result;
   const cityOptions = getOptions().getCityOptions(records);
+<<<<<<< HEAD
   const districtOptions = getOptions().getDistrictOptions(records, '臺北市');
+=======
+  const districtOptions = getOptions().getAllDistrictOptions(records);
+>>>>>>> c5d62571967bebedd9a2386136e8376a2be6fd86
   const years = ['111', '110', '109', '108', '107', '106', '105', '104', '103'];
 
   const result = [];

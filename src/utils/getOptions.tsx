@@ -39,5 +39,22 @@ export default function getOptions() {
     return result;
   };
 
-  return { getCityOptions, getDistrictOptions };
+  const getAllDistrictOptions = (records: any) => {
+    records.forEach((item: any) => {
+      !options.has(item.site_id.substring(3, 6))
+        ? options.add(item.site_id.substring(3, 6))
+        : false;
+    });
+    const districtOptionsArr = Array.from(options);
+    districtOptionsArr.shift();
+    for (let i = 0; i < districtOptionsArr.length; i++) {
+      result.push({
+        value: districtOptionsArr[i],
+        label: districtOptionsArr[i],
+      });
+    }
+    return result;
+  };
+
+  return { getCityOptions, getDistrictOptions, getAllDistrictOptions };
 }
