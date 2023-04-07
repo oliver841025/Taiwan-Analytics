@@ -21,9 +21,11 @@ function Search(props: any) {
 
   const router = useRouter();
 
-  //   setYear(`${router.query.yearId}` as string);
-  // }, [router.query]);
+  const cityOptions = getOptions().getCityOptions;
+  const districtOptions = getOptions().getDistrictOptions;
 
+  const handleYearChange = (value: string) => {
+    // console.log(`selected ${value}`);
     setYear(value);
   };
 
