@@ -14,15 +14,12 @@ import { useEffect, useState } from 'react';
 import classes from './Search.module.scss';
 
 function Search(props: any) {
-<<<<<<< HEAD
-=======
   const { records } = props;
   const [year, setYear] = useState('');
   const [city, setCity] = useState('');
   const [district, setDistrict] = useState(null);
   //   console.log(records);
 
->>>>>>> c5d62571967bebedd9a2386136e8376a2be6fd86
   const router = useRouter();
   const {
     records,
@@ -38,12 +35,7 @@ function Search(props: any) {
   // console.log(records);
 
   // useEffect(() => {
-<<<<<<< HEAD
-  //   console.log(router.query);
-  //   setYear(`${router.query.slug[0]}` as string);
-=======
   //   setYear(`${router.query.yearId}` as string);
->>>>>>> c5d62571967bebedd9a2386136e8376a2be6fd86
   // }, [router.query]);
 
   const cityOptions = getOptions().getCityOptions(localRecords);
