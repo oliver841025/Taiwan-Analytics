@@ -14,7 +14,6 @@ function YearIndex(props) {
   const { data } = props;
   const { records } = data.result;
   const router = useRouter();
-  //   console.log(records);
   const [targetData, setTargetData] = useState([]);
   const [householdOrdinaryMale, setHouseholdOrdinaryMale] = useState(0);
   const [householdOrdinaryFemale, setHouseholdOrdinaryFemale] = useState(0);
@@ -105,7 +104,11 @@ export async function getStaticPaths() {
   const data = await res.json();
   const { records } = data.result;
   const cityOptions = getOptions().getCityOptions(records);
+<<<<<<< HEAD
   const districtOptions = getOptions().getAllDistrictOptions(records);
+=======
+  const districtOptions = getOptions().getDistrictOptions(records);
+>>>>>>> parent of 88dae9f (v2)
   const years = ['111', '110', '109', '108', '107', '106', '105', '104', '103'];
 
   const result = [];

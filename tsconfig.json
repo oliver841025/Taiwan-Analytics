@@ -24,8 +24,7 @@
     "**/*.tsx",
     "src/components/population/Population.tsx",
     "src/pages/[...yearId]/index.js.js",
-    "src/components/search/Search.tsxx",
-    "src/utils/rawData"
+    "src/components/search/Search.tsxx"
   ],
   "exclude": ["node_modules"]
 }
