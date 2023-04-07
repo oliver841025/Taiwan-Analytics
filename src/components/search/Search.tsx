@@ -7,26 +7,35 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable import/extensions */
 import getOptions from '@/utils/getOptions';
+import { localRecords } from '@/utils/localRecords';
 import { Select, Space } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import classes from './Search.module.scss';
 
 function Search(props: any) {
-  const { records } = props;
-  const [year, setYear] = useState('111');
-  const [city, setCity] = useState('');
-  const [district, setDistrict] = useState(null);
-  //   console.log(records);
-
   const router = useRouter();
+  const {
+    records,
+    setRecords,
+    year,
+    setYear,
+    city,
+    setCity,
+    district,
+    setDistrict,
+    setIsSubmitClicked,
+  } = props;
+  // console.log(records);
 
-  useEffect(() => {
-    setYear(`${router.query.yearId}` as string);
-  }, [router.query]);
+  // useEffect(() => {
+  //   console.log(router.query);
+  //   setYear(`${router.query.slug[0]}` as string);
+  // }, [router.query]);
 
-  const cityOptions = getOptions().getCityOptions;
-  const districtOptions = getOptions().getDistrictOptions;
+  const cityOptions = getOptions().getCityOptions(localRecords);
+  const districtOptions = getOptions().getDistrictOptions(localRecords, city);
+  // console.log('districtOptions', districtOptions);
 
   const handleYearChange = (value: string) => {
     // console.log(`selected ${value}`);
@@ -44,31 +53,23 @@ function Search(props: any) {
     setDistrict(value);
   };
 
+  async function fetchRecords() {
+    const url =
+      'https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-004';
+    const res = await fetch(url);
+    const data = await res.json();
+    const result = data.result.records;
+    result.shift();
+    return result;
+  }
+
   const handleSubmit = () => {
     router.push(`/${year}/${city}/${district}`);
+    setIsSubmitClicked(true);
     // console.log('year:', year, 'city:', city, 'district:', district);
-  };
-
-  const getRealDistrictOptions = (records: any, city: any) => {
-    const options = new Set();
-    const result: any[] = [];
-
-    records.forEach((item: any) => {
-      if (item.site_id.substring(0, 3) === city.toString()) {
-        !options.has(item.site_id.substring(3, 6))
-          ? options.add(item.site_id.substring(3, 6))
-          : false;
-      }
-    });
-    const districtOptionsArr = Array.from(options);
-    districtOptionsArr.shift();
-    for (let i = 0; i < districtOptionsArr.length; i++) {
-      result.push({
-        value: districtOptionsArr[i],
-        label: districtOptionsArr[i],
-      });
-    }
-    return result;
+    // setRecords(fetchRecords());
+    setRecords(localRecords);
+    // console.log(records);
   };
 
   return (
@@ -118,7 +119,7 @@ function Search(props: any) {
             bordered={false}
             className={classes.city_and_district_select}
             onChange={handleCityChange}
-            options={cityOptions(records)}
+            options={cityOptions}
             filterOption={(inputValue, option) =>
               option!.label.indexOf(inputValue) !== -1
             }
@@ -141,7 +142,7 @@ function Search(props: any) {
             bordered={false}
             className={classes.city_and_district_select}
             onChange={handleDistrictChange}
-            options={getRealDistrictOptions(records, city)}
+            options={districtOptions}
             filterOption={(inputValue, option) =>
               option!.label.indexOf(inputValue) !== -1
             }
