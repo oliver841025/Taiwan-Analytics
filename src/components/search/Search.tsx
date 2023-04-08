@@ -41,7 +41,7 @@ function Search(props: any) {
   };
 
   const handleSubmit = () => {
-    router.push(`/${year}/${city}/${district}`);
+    router.push(`/${year}/${city}/${district}`, undefined, { shallow: true });
     // console.log('year:', year, 'city:', city, 'district:', district);
   };
 
