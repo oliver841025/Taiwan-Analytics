@@ -2,12 +2,17 @@
 /* eslint-disable react/jsx-filename-extension */
 import Search from '@/components/search/Search';
 import type { AppProps } from 'next/app';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classes from '../styles/global.module.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
   const { data } = pageProps;
   const records = data.responseData;
+
+  const [allRecords, setAllRecords] = useState([]);
+  useEffect(() => {
+    if (data) setAllRecords(records);
+  }, [data, records]);
 
   const [year, setYear] = useState('');
   const [city, setCity] = useState('');
@@ -17,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <div>
       <div className={classes.title}>人口數、戶數按戶別及性別統計</div>
       <Search
-        records={records}
+        records={allRecords}
         year={year}
         setYear={setYear}
         city={city}
