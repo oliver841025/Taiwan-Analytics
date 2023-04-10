@@ -3,7 +3,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 // import classes from './Households.module.scss';
 
-const getOptions = (numOrdinary: number, numSingle: number) => {
+const options = (numOrdinary: number, numSingle: number) => {
   const options = {
     chart: {
       type: 'pie',
@@ -55,7 +55,7 @@ function Households(props: any) {
       <div id="container" style={{ width: '100%', height: '400px' }}>
         <HighchartsReact
           highcharts={Highcharts}
-          options={getOptions(householdOrdinaryTotal, householdSingleTotal)}
+          options={options(householdOrdinaryTotal, householdSingleTotal)}
         />
       </div>
     </div>

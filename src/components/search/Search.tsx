@@ -6,19 +6,19 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable import/extensions */
-import getOptions from '@/utils/getOptions';
+import options from '@/utils/options';
 import { Select, Space } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import classes from './Search.module.scss';
 
 function Search(props: any) {
-  const { year, setYear, city, setCity, district, setDistrict } = props;
-  // console.log(records);
+  const { year, setYear, city, setCity, district, setDistrict, setIsLoading } =
+    props;
   const router = useRouter();
 
-  const cityOptions = getOptions().getCityOptions;
-  const districtOptions = getOptions().getDistrictOptions;
+  const cityOptions = options().getCityOptions;
+  const districtOptions = options().getDistrictOptions;
 
   const handleYearChange = (value: string) => {
     // console.log(`selected ${value}`);
@@ -38,6 +38,7 @@ function Search(props: any) {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    setIsLoading(true);
     router.push(`/${year}/${city}/${district}`);
   };
 

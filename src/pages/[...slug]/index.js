@@ -7,11 +7,12 @@ import Population from '@/components/population/Population';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import classes from '@/styles/global.module.scss';
+import { Space, Spin } from 'antd';
 
 function YearIndex(props) {
-  const { data } = props;
-  const records = data.responseData;
   const router = useRouter();
+  const { data, isLoading, setIsLoading } = props;
+  const records = data.responseData;
 
   const [targetData, setTargetData] = useState([]);
   const [householdOrdinaryMale, setHouseholdOrdinaryMale] = useState(0);
@@ -20,6 +21,14 @@ function YearIndex(props) {
   const [householdSingleFemale, setHouseholdSingleFemale] = useState(0);
   const [householdOrdinaryTotal, setHouseholdOrdinaryTotal] = useState(0);
   const [householdSingleTotal, setHouseholdSingleTotal] = useState(0);
+
+  useEffect(() => {
+    if (targetData.length !== 0) {
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+    }
+  }, [targetData, setIsLoading]);
 
   useEffect(() => {
     const flag = router.query.slug[1] + router.query.slug[2];
@@ -49,19 +58,35 @@ function YearIndex(props) {
 
   return (
     <>
-      <div className={classes.subtitle}>
-        {`${router.query.slug[0]} ${router.query.slug[1]} ${router.query.slug[2]}`}
-      </div>
-      <Population
-        householdOrdinaryMale={householdOrdinaryMale}
-        householdOrdinaryFemale={householdOrdinaryFemale}
-        householdSingleMale={householdSingleMale}
-        householdSingleFemale={householdSingleFemale}
-      />
-      <Households
-        householdOrdinaryTotal={householdOrdinaryTotal}
-        householdSingleTotal={householdSingleTotal}
-      />
+      {isLoading && (
+        <Space
+          size="middle"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Spin size="large" />
+        </Space>
+      )}
+      {!isLoading && (
+        <>
+          <div className={classes.subtitle}>
+            {`${router.query.slug[0]} ${router.query.slug[1]} ${router.query.slug[2]}`}
+          </div>
+          <Population
+            householdOrdinaryMale={householdOrdinaryMale}
+            householdOrdinaryFemale={householdOrdinaryFemale}
+            householdSingleMale={householdSingleMale}
+            householdSingleFemale={householdSingleFemale}
+          />
+          <Households
+            householdOrdinaryTotal={householdOrdinaryTotal}
+            householdSingleTotal={householdSingleTotal}
+          />
+        </>
+      )}
     </>
   );
 }

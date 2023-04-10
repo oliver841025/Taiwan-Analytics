@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-unused-expressions */
-export default function getOptions() {
+export default function options() {
   const options = new Set();
   const result: any[] = [];
 
@@ -27,7 +27,6 @@ export default function getOptions() {
       }
     });
     const districtOptionsArr = Array.from(options);
-    // districtOptionsArr.shift();
     for (let i = 0; i < districtOptionsArr.length; i++) {
       result.push({
         value: districtOptionsArr[i],
@@ -37,22 +36,5 @@ export default function getOptions() {
     return result;
   };
 
-  const getAllDistrictOptions = (records: any) => {
-    records.forEach((item: any) => {
-      !options.has(item.site_id.substring(3, 6))
-        ? options.add(item.site_id.substring(3, 6))
-        : false;
-    });
-    const districtOptionsArr = Array.from(options);
-    districtOptionsArr.shift();
-    for (let i = 0; i < districtOptionsArr.length; i++) {
-      result.push({
-        value: districtOptionsArr[i],
-        label: districtOptionsArr[i],
-      });
-    }
-    return result;
-  };
-
-  return { getCityOptions, getDistrictOptions, getAllDistrictOptions };
+  return { getCityOptions, getDistrictOptions };
 }

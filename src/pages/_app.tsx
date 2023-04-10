@@ -2,13 +2,14 @@
 /* eslint-disable react/jsx-filename-extension */
 import Search from '@/components/search/Search';
 import type { AppProps } from 'next/app';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import classes from '../styles/global.module.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [year, setYear] = useState('');
   const [city, setCity] = useState('');
   const [district, setDistrict] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div>
@@ -20,8 +21,13 @@ export default function App({ Component, pageProps }: AppProps) {
         setCity={setCity}
         district={district}
         setDistrict={setDistrict}
+        setIsLoading={setIsLoading}
       />
-      <Component {...pageProps} />
+      <Component
+        {...pageProps}
+        setIsLoading={setIsLoading}
+        isLoading={isLoading}
+      />
     </div>
   );
 }

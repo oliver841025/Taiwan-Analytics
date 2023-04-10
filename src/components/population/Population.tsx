@@ -4,7 +4,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import classes from './Population.module.scss';
 
-const getOptions = (
+const options = (
   numOrdinaryM: number,
   numOrdinaryF: number,
   numSingleM: number,
@@ -61,7 +61,7 @@ function Population(props: any) {
       <div id="container" className={classes.chart}>
         <HighchartsReact
           highcharts={Highcharts}
-          options={getOptions(
+          options={options(
             householdOrdinaryMale,
             householdOrdinaryFemale,
             householdSingleMale,
