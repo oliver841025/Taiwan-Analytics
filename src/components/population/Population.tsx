@@ -38,11 +38,19 @@ const options = (
         name: '男性',
         data: [numOrdinaryM / 1000, numSingleM / 1000],
         color: '#7D5FB2',
+        dataLabels: {
+          enabled: true,
+          format: '{y}', // 顯示數字格式
+        },
       },
       {
         name: '女性',
         data: [numOrdinaryF / 1000, numSingleF / 1000],
         color: '#C29FFF',
+        dataLabels: {
+          enabled: true,
+          format: '{y}', // 顯示數字格式
+        },
       },
     ],
   };
