@@ -38,9 +38,7 @@ function Search(props: any) {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    router.push(`/${year}/${city}/${district}`, undefined, {
-      shallow: true,
-    });
+    router.push(`/${year}/${city}/${district}`);
   };
 
   const [allRecords, setAllRecords] = useState([]);
