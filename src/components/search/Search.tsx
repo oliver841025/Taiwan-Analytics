@@ -13,11 +13,8 @@ import { useEffect, useState } from 'react';
 import classes from './Search.module.scss';
 
 function Search(props: any) {
-  const { records } = props;
-  const [year, setYear] = useState('');
-  const [city, setCity] = useState('');
-  const [district, setDistrict] = useState(null);
-  //   console.log(records);
+  const { records, year, setYear, city, setCity, district, setDistrict } =
+    props;
 
   const router = useRouter();
 
@@ -40,31 +37,18 @@ function Search(props: any) {
     setDistrict(value);
   };
 
-  const handleSubmit = () => {
-    router.push(`/${year}/${city}/${district}`, undefined, { shallow: true });
-    // console.log('year:', year, 'city:', city, 'district:', district);
-  };
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    // 申請到 api 後，這邊要根據 year 去打當年的 api 資料
+    // fetch.....
+    // const resultRecords = records.filter((el: any) => {
+    //   return el.site_id === city + district;
+    // });
+    // setTargetData(resultRecords);
 
-  const getRealDistrictOptions = (records: any, city: any) => {
-    const options = new Set();
-    const result: any[] = [];
-
-    records.forEach((item: any) => {
-      if (item.site_id.substring(0, 3) === city.toString()) {
-        !options.has(item.site_id.substring(3, 6))
-          ? options.add(item.site_id.substring(3, 6))
-          : false;
-      }
+    router.push(`/${year}/${city}/${district}`, undefined, {
+      shallow: true,
     });
-    const districtOptionsArr = Array.from(options);
-    districtOptionsArr.shift();
-    for (let i = 0; i < districtOptionsArr.length; i++) {
-      result.push({
-        value: districtOptionsArr[i],
-        label: districtOptionsArr[i],
-      });
-    }
-    return result;
   };
 
   return (
@@ -138,7 +122,7 @@ function Search(props: any) {
             bordered={false}
             className={classes.city_and_district_select}
             onChange={handleDistrictChange}
-            options={getRealDistrictOptions(records, city)}
+            options={districtOptions(records, city)}
             filterOption={(inputValue, option) =>
               option!.label.indexOf(inputValue) !== -1
             }
