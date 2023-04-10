@@ -4,19 +4,14 @@
 /* eslint-disable import/extensions */
 import Households from '@/components/households/Households';
 import Population from '@/components/population/Population';
-import Search from '@/components/search/Search';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import classes from '@/styles/global.module.scss';
 
 function YearIndex(props) {
   const { data } = props;
-  const { records } = data.result;
+  const records = data.responseData;
   const router = useRouter();
-
-  const [year, setYear] = useState('');
-  const [city, setCity] = useState('');
-  const [district, setDistrict] = useState(null);
 
   const [targetData, setTargetData] = useState([]);
   const [householdOrdinaryMale, setHouseholdOrdinaryMale] = useState(0);
@@ -54,15 +49,6 @@ function YearIndex(props) {
 
   return (
     <>
-      <Search
-        records={records}
-        year={year}
-        setYear={setYear}
-        city={city}
-        setCity={setCity}
-        district={district}
-        setDistrict={setDistrict}
-      />
       <div className={classes.subtitle}>
         {`${router.query.slug[0]} ${router.query.slug[1]} ${router.query.slug[2]}`}
       </div>
@@ -81,25 +67,9 @@ function YearIndex(props) {
 }
 
 export async function getServerSideProps({ params }) {
-  let flag = '053';
-  const matchData = [
-    { year: '111', value: '053' },
-    { year: '110', value: '049' },
-    { year: '109', value: '045' },
-    { year: '108', value: '041' },
-    { year: '107', value: '033' },
-    { year: '106', value: '020' },
-    { year: '105', value: '008' },
-    { year: '104', value: '004' },
-    { year: '103', value: '012' },
-  ];
-  for (let i = 0; i < matchData.length; i++) {
-    if (params.slug[0] === matchData[i].year) {
-      flag = matchData[i].value;
-    }
-  }
+  const year = params.slug[0];
   const res = await fetch(
-    `https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-${flag}`
+    `https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}`
   );
   const data = await res.json();
   return {

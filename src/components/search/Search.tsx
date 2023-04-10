@@ -16,6 +16,7 @@ function Search(props: any) {
   const { records, year, setYear, city, setCity, district, setDistrict } =
     props;
 
+  // console.log(records);
   const router = useRouter();
 
   const cityOptions = getOptions().getCityOptions;
@@ -39,13 +40,6 @@ function Search(props: any) {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    // 申請到 api 後，這邊要根據 year 去打當年的 api 資料
-    // fetch.....
-    // const resultRecords = records.filter((el: any) => {
-    //   return el.site_id === city + district;
-    // });
-    // setTargetData(resultRecords);
-
     router.push(`/${year}/${city}/${district}`, undefined, {
       shallow: true,
     });
@@ -63,7 +57,6 @@ function Search(props: any) {
         >
           <legend style={{ fontSize: '7px' }}>年份</legend>
           <Select
-            showSearch
             bordered={false}
             placeholder="年份"
             style={{
@@ -78,10 +71,6 @@ function Search(props: any) {
               { value: '108', label: '108' },
               { value: '107', label: '107' },
               { value: '106', label: '106' },
-              { value: '105', label: '105' },
-              { value: '104', label: '104' },
-              { value: '103', label: '103' },
-              //   { value: 'disabled', label: 'Disabled', disabled: true },
             ]}
           />
         </fieldset>
