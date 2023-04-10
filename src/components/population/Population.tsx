@@ -21,12 +21,22 @@ const options = (
       categories: ['共同生活', '獨立生活'],
       title: {
         text: '型態',
+        style: {
+          fontWeight: 700,
+        },
       },
     },
     yAxis: {
       min: 0,
       title: {
         text: '數量',
+        rotation: 0,
+        align: 'high',
+        y: -30,
+        x: 35,
+        style: {
+          fontWeight: 700,
+        },
       },
       labels: {
         format: '{value:.0f}k',
