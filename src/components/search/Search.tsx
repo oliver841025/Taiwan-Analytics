@@ -13,9 +13,7 @@ import { useEffect, useState } from 'react';
 import classes from './Search.module.scss';
 
 function Search(props: any) {
-  const { records, year, setYear, city, setCity, district, setDistrict } =
-    props;
-
+  const { year, setYear, city, setCity, district, setDistrict } = props;
   // console.log(records);
   const router = useRouter();
 
@@ -44,6 +42,20 @@ function Search(props: any) {
       shallow: true,
     });
   };
+
+  const [allRecords, setAllRecords] = useState([]);
+
+  useEffect(() => {
+    async function fetchAPI() {
+      const res = await fetch(
+        'https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/106'
+      );
+      const data = await res.json();
+      setAllRecords(data.responseData);
+    }
+
+    fetchAPI();
+  }, []);
 
   return (
     <>
@@ -88,7 +100,7 @@ function Search(props: any) {
             bordered={false}
             className={classes.city_and_district_select}
             onChange={handleCityChange}
-            options={cityOptions(records)}
+            options={cityOptions(allRecords)}
             filterOption={(inputValue, option) =>
               option!.label.indexOf(inputValue) !== -1
             }
@@ -111,7 +123,7 @@ function Search(props: any) {
             bordered={false}
             className={classes.city_and_district_select}
             onChange={handleDistrictChange}
-            options={districtOptions(records, city)}
+            options={districtOptions(allRecords, city)}
             filterOption={(inputValue, option) =>
               option!.label.indexOf(inputValue) !== -1
             }
