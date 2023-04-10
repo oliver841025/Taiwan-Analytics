@@ -49,6 +49,7 @@ const getOptions = (numOrdinary: number, numSingle: number) => {
 
 function Households(props: any) {
   const { householdOrdinaryTotal, householdSingleTotal } = props;
+
   return (
     <div style={{ marginTop: '40px' }}>
       <div id="container" style={{ width: '100%', height: '400px' }}>

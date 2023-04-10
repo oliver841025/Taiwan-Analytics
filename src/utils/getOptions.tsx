@@ -28,7 +28,7 @@ export default function getOptions() {
       }
     });
     const districtOptionsArr = Array.from(options);
-    districtOptionsArr.shift();
+    // districtOptionsArr.shift();
     for (let i = 0; i < districtOptionsArr.length; i++) {
       result.push({
         value: districtOptionsArr[i],

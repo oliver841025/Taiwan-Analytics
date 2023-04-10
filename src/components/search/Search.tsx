@@ -13,12 +13,10 @@ import { useEffect, useState } from 'react';
 import classes from './Search.module.scss';
 
 function Search(props: any) {
-  const { records } = props;
-  const [year, setYear] = useState('');
-  const [city, setCity] = useState('');
-  const [district, setDistrict] = useState(null);
-  //   console.log(records);
+  const { records, year, setYear, city, setCity, district, setDistrict } =
+    props;
 
+  // console.log(records);
   const router = useRouter();
 
   const cityOptions = getOptions().getCityOptions;
@@ -40,31 +38,11 @@ function Search(props: any) {
     setDistrict(value);
   };
 
-  const handleSubmit = () => {
-    router.push(`/${year}/${city}/${district}`);
-    // console.log('year:', year, 'city:', city, 'district:', district);
-  };
-
-  const getRealDistrictOptions = (records: any, city: any) => {
-    const options = new Set();
-    const result: any[] = [];
-
-    records.forEach((item: any) => {
-      if (item.site_id.substring(0, 3) === city.toString()) {
-        !options.has(item.site_id.substring(3, 6))
-          ? options.add(item.site_id.substring(3, 6))
-          : false;
-      }
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    router.push(`/${year}/${city}/${district}`, undefined, {
+      shallow: true,
     });
-    const districtOptionsArr = Array.from(options);
-    districtOptionsArr.shift();
-    for (let i = 0; i < districtOptionsArr.length; i++) {
-      result.push({
-        value: districtOptionsArr[i],
-        label: districtOptionsArr[i],
-      });
-    }
-    return result;
   };
 
   return (
@@ -79,7 +57,6 @@ function Search(props: any) {
         >
           <legend style={{ fontSize: '7px' }}>年份</legend>
           <Select
-            showSearch
             bordered={false}
             placeholder="年份"
             style={{
@@ -94,10 +71,6 @@ function Search(props: any) {
               { value: '108', label: '108' },
               { value: '107', label: '107' },
               { value: '106', label: '106' },
-              { value: '105', label: '105' },
-              { value: '104', label: '104' },
-              { value: '103', label: '103' },
-              //   { value: 'disabled', label: 'Disabled', disabled: true },
             ]}
           />
         </fieldset>
@@ -138,7 +111,7 @@ function Search(props: any) {
             bordered={false}
             className={classes.city_and_district_select}
             onChange={handleDistrictChange}
-            options={getRealDistrictOptions(records, city)}
+            options={districtOptions(records, city)}
             filterOption={(inputValue, option) =>
               option!.label.indexOf(inputValue) !== -1
             }
