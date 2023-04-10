@@ -47,15 +47,18 @@ function Search(props: any) {
 
   useEffect(() => {
     async function fetchAPI() {
+      console.log(year);
       const res = await fetch(
-        'https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/106'
+        year
+          ? `{https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}}`
+          : `{https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/106`
       );
       const data = await res.json();
       setAllRecords(data.responseData);
     }
 
     fetchAPI();
-  }, []);
+  }, [year]);
 
   return (
     <>
