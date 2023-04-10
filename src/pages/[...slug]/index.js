@@ -69,7 +69,6 @@ function YearIndex(props) {
 export async function getServerSideProps({ params }) {
   const year = params.slug[0];
   const url = `https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}`;
-  console.log(url);
   const res = await fetch(url);
   const data = await res.json();
   return {
