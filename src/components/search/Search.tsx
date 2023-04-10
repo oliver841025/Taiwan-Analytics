@@ -49,8 +49,8 @@ function Search(props: any) {
     async function fetchAPI() {
       const res = await fetch(
         year
-          ? `{https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}}`
-          : `{https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/106`
+          ? `https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}`
+          : `https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/106`
       );
       const data = await res.json();
       setAllRecords(data.responseData);

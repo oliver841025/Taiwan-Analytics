@@ -11,10 +11,11 @@ export default function getOptions() {
         : false;
     });
     const cityOptionsArr = Array.from(options);
-    cityOptionsArr.shift(); // 移除第一筆，因為是說明
     for (let i = 0; i < cityOptionsArr.length; i++) {
       result.push({ value: cityOptionsArr[i], label: cityOptionsArr[i] });
     }
+    console.log(result);
+
     return result;
   };
 
