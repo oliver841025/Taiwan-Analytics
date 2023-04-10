@@ -47,7 +47,6 @@ function Search(props: any) {
 
   useEffect(() => {
     async function fetchAPI() {
-      console.log(year);
       const res = await fetch(
         year
           ? `{https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}}`
