@@ -97,7 +97,8 @@ function Search(props: any) {
           <legend style={{ fontSize: '7px' }}>縣 / 市</legend>
           <Select
             showSearch
-            placeholder="請選擇縣 / 市"
+            disabled={!year}
+            placeholder={year ? '請選擇縣 / 市' : '請先選擇年份'}
             bordered={false}
             className={classes.city_and_district_select}
             onChange={handleCityChange}
@@ -120,7 +121,7 @@ function Search(props: any) {
             value={district}
             disabled={!city}
             showSearch
-            placeholder="請先選擇縣 / 市"
+            placeholder={city ? '請選擇區' : '請先選擇縣市'}
             bordered={false}
             className={classes.city_and_district_select}
             onChange={handleDistrictChange}

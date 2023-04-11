@@ -31,10 +31,14 @@ function YearIndex(props) {
   }, [targetData, setIsLoading]);
 
   useEffect(() => {
-    const flag = router.query.slug[1] + router.query.slug[2];
-    const result = records.filter((el) => el.site_id === flag);
-    setTargetData(result);
-  }, [router.query, records]);
+    try {
+      const flag = router.query.slug[1] + router.query.slug[2];
+      const result = records.filter((el) => el.site_id === flag);
+      setTargetData(result);
+    } catch (error) {
+      router.push('/404');
+    }
+  }, [router.query, records, router]);
 
   const getDetailTotal = useCallback(
     (flag) => {
