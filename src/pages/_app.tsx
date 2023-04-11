@@ -3,6 +3,7 @@
 import Search from '@/components/search/Search';
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
+import { Space, Spin } from 'antd';
 import classes from '../styles/global.module.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -10,7 +11,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const [city, setCity] = useState('');
   const [district, setDistrict] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
   return (
     <div>
       <div className={classes.title}>人口數、戶數按戶別及性別統計</div>
@@ -23,6 +23,18 @@ export default function App({ Component, pageProps }: AppProps) {
         setDistrict={setDistrict}
         setIsLoading={setIsLoading}
       />
+      {isLoading && (
+        <Space
+          size="middle"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Spin size="large" />
+        </Space>
+      )}
       <Component
         {...pageProps}
         setIsLoading={setIsLoading}

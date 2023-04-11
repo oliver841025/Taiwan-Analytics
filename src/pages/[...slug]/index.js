@@ -7,7 +7,6 @@ import Population from '@/components/population/Population';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import classes from '@/styles/global.module.scss';
-import { Space, Spin } from 'antd';
 
 function YearIndex(props) {
   const router = useRouter();
@@ -62,18 +61,6 @@ function YearIndex(props) {
 
   return (
     <>
-      {isLoading && (
-        <Space
-          size="middle"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Spin size="large" />
-        </Space>
-      )}
       {!isLoading && (
         <>
           <div className={classes.subtitle}>
