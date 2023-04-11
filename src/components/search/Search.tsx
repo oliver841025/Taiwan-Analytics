@@ -21,18 +21,15 @@ function Search(props: any) {
   const districtOptions = options().getDistrictOptions;
 
   const handleYearChange = (value: string) => {
-    // console.log(`selected ${value}`);
     setYear(value);
   };
 
   const handleCityChange = (value: string) => {
-    // console.log(`selected ${value}`);
     setCity(value);
     setDistrict(null);
   };
 
-  const handleDistrictChange = (value: any) => {
-    // console.log(`selected ${value}`);
+  const handleDistrictChange = (value: string) => {
     setDistrict(value);
   };
 
