@@ -32,7 +32,7 @@ function Search(props: any) {
     setDistrict(null);
   };
 
-  const handleDistrictChange = (value: string) => {
+  const handleDistrictChange = (value: any) => {
     setDistrict(value);
   };
 
