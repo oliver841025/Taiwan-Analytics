@@ -13,9 +13,12 @@ import { useEffect, useState } from 'react';
 import classes from './Search.module.scss';
 
 function Search(props: any) {
-  const { year, setYear, city, setCity, district, setDistrict, setIsLoading } =
-    props;
+  const { setIsLoading } = props;
   const router = useRouter();
+
+  const [year, setYear] = useState('');
+  const [city, setCity] = useState('');
+  const [district, setDistrict] = useState(null);
 
   const cityOptions = options().getCityOptions;
   const districtOptions = options().getDistrictOptions;
